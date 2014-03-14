@@ -1,0 +1,6 @@
+d3block:
+  jshead: [js/d3.v3.min.js, js/d3.tip.v0.6.3.js]
+  cdn:
+    jshead:
+      - http://d3js.org/d3.v3.min.js
+      - http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js

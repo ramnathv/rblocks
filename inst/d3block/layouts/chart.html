@@ -1,0 +1,79 @@
+<script>
+var chartParams = {{{ chartParams }}},
+  data = chartParams.data,
+  alpha = chartParams.alpha || 1
+
+// Code Borrowed from http://bl.ocks.org/Caged/6476579
+var margin = {top: 20, right: 80, bottom: 30, left: 50},
+    width = 400 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
+
+//height of each row in the heatmap
+//width of each column in the heatmap
+var gridSize = width/10,
+    h = gridSize,
+    w = gridSize,
+    rectPadding = 60;
+
+var svg = d3.select("#{{ chartId }}").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([10, 0])
+  .html(function(d) {
+    return "<strong>(" + d[0] + " , " + d[1] +  ")</span>";
+  })
+
+svg.call(tip)
+
+var heatMap = svg.selectAll(".heatmap")
+    .data(data)
+  .enter().append("svg:rect")
+    .attr("x", function(d) { return alpha*d[1] * w; })
+    .attr("y", function(d) { return d[0] * h; })
+    .attr("width", function(d) { return w; })
+    .attr("height", function(d) { return h; })
+    .style("stroke", "white")
+    .style("fill", function(d) { return d[2] })
+    .style("padding-right", "5px")
+    .on('mouseover', tip.show)
+    .on('mouseout', tip.hide)
+</script>
+    
+<style>
+  body {
+  font: 14px sans-serif;
+}
+.d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+}
+
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
+</style>
