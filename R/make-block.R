@@ -15,9 +15,9 @@ make_block.matrix <- function(x, ...){
 }
 
 make_block.data.frame = function(x, ...){
-  as.block(apply(x, 2, function(xi){
+  as.block(as.data.frame(lapply(x, function(xi){
     rep(get_fill(mode(xi)), length(xi))
-  }))
+  }), stringsAsFactors = F))
 }
 
 # make_block.default = function(x){
