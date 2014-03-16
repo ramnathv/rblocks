@@ -53,3 +53,5 @@ m1
 m1[,1] <- 'orange'
 m1
 
+l1 <- list(x = 1:3, y = LETTERS[1:3], z = c(T, F, T))
+
