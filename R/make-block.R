@@ -4,19 +4,19 @@ make_block <- function(x, ...){
 
 make_block.list <- function(x, ...){
   as.block(lapply(x, function(xi){
-    rep(get_fill(mode(xi)), length(xi))
+    rep(get_fill(xi), length(xi))
   }))
 }
 
 make_block.matrix <- function(x, ...){
-  as.block(apply(x, 2, function(xj){
-    rep(get_fill(mode(xi)), length(xj))
+  as.block(apply(x, 2, function(xi){
+    rep(get_fill(xi), length(xi))
   }))
 }
 
 make_block.data.frame = function(x, ...){
   as.block(as.data.frame(lapply(x, function(xi){
-    rep(get_fill(mode(xi)), length(xi))
+    rep(get_fill(xi), length(xi))
   }), stringsAsFactors = F))
 }
 
@@ -26,7 +26,7 @@ make_block.data.frame = function(x, ...){
 
 make_block.default = function(x, ...){
   if (length(x) > 1){
-    return(as.block(rep(get_fill(mode(xi)), length(x))))
+    return(as.block(rep(get_fill(x), length(x))))
   }
   dotlist = list(nrow = x, ...)
   if (!("type" %in% names(dotlist))){
@@ -38,10 +38,19 @@ make_block.default = function(x, ...){
   do.call('block_grid', dotlist)
 }
 
-get_fill <- function(x){
-  "#7BEA7B"
-  # switch(x, 'numeric' = "#BAE4B3", 'logical' = "#74C476", "#31A354")
+
+
+fill_by <- function(f){
+  function(x){
+    switch(f(x), 'numeric' = "#a6cee3", 'logical' = "#1f78b4", "#b2df8a")
+  }
 }
+
+
+get_fill = function(x){
+  getOption('fill_by', function(x){return("#b2df8a")})(x)
+}
+
 
 infer_type = function(x){
   if (is.data.frame(x)){
