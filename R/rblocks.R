@@ -89,7 +89,7 @@ display = function(block, show_values = F){
   cur_mar = par('mar')
   par(mar = c(0.5, 0.5, 0.5, 0.5))
   plot(1, 1, xlim = c(0, o + 1), ylim = c(n + 1, 0), type = "n",
-       axes = FALSE, xlab = "", ylab = ""
+       axes = FALSE, xlab = "", ylab = "", asp = 1
   )
   if (is.data.frame(data)){
     segments(1, 0, o, 0, col = 'darkgray')
