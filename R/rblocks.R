@@ -1,5 +1,5 @@
 #' Creates a block grid of a given data type
-#' 
+#'
 #' @param nrow number of rows
 #' @param ncol number of columns
 #' @param type data type of object
@@ -24,7 +24,7 @@ block_grid = function(nrow, ncol = nrow, type = 'data.frame', fill = get_fill(""
 }
 
 #' Print a block object as raw data
-#' 
+#'
 #' @param x object to print
 #' @export
 print_raw = function(x){
@@ -33,7 +33,7 @@ print_raw = function(x){
 }
 
 #' Add block class to an object
-#' 
+#'
 #' @param x object to add block class to
 #' @keywords internal
 as.block = function(x){
@@ -42,7 +42,7 @@ as.block = function(x){
 }
 
 #' Print a block object as a grid
-#' 
+#'
 #' @param x block object to display
 #' @export
 print.block = function(x){
@@ -50,10 +50,11 @@ print.block = function(x){
 }
 
 #' Display a block grid
-#' 
+#'
+#' The implementation here is borrowed from sna::plot.sociomatrix
+#'
 #' @param block an object of block class
 #' @export
-#' The implementation here is borrowed from sna::plot.sociomatrix
 display = function(block, show_values = F){
   values = block
   if (!('block' %in% class(block))){
@@ -61,7 +62,7 @@ display = function(block, show_values = F){
   }
   gap = 0.5
   if (!is.atomic(block) && is.null(dim(block))){
-    maxLen = max(sapply(block, length)) 
+    maxLen = max(sapply(block, length))
     data = as.data.frame(matrix('white', maxLen, length(block)))
     datavalues = as.data.frame(matrix('', maxLen, length(block)))
     if (!is.null(names(block))) names(data) = names(block)
@@ -101,14 +102,14 @@ display = function(block, show_values = F){
   }
   for (i in 1:n){
     for (j in 1:o) {
-      rect(j - gap, i + 0.5, j + gap, i - 0.5, 
+      rect(j - gap, i + 0.5, j + gap, i - 0.5,
         col = data[i, j], xpd = TRUE, border = 'white'
       )
       # text(i, j, labels = paste("(", i, ",", j, ")"))
       # text(j, i, labels = paste("(", j, ",", i, ")"))
     }
   }
-  
+
   if (show_values){
     for (i in 1:NCOL(datavalues)){
       for (j in 1:NROW(datavalues)) {
@@ -116,7 +117,7 @@ display = function(block, show_values = F){
       }
     }
   }
-  
+
   rect(0.5, 0.5, o + 0.5, n + 0.5, col = NA, xpd = TRUE, border = 'white')
   par(mar = cur_mar)
 }
