@@ -36,6 +36,7 @@ print_raw = function(x){
 #'
 #' @param x object to add block class to
 #' @keywords internal
+#' @export
 as.block = function(x){
   class(x) = c('block', class(x))
   return(x)
