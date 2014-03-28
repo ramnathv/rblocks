@@ -2,6 +2,7 @@ block_to_json = function(x){
   UseMethod("block_to_json")
 }
 
+#' @export
 block_to_json.matrix <- function(x){
   dat = vector('list', NROW(x)*NCOL(x))
   m = 1
@@ -14,6 +15,7 @@ block_to_json.matrix <- function(x){
   return(dat)
 }
 
+#' @export
 block_to_json.data.frame <- function(x){
   dat = vector('list', NROW(x)*NCOL(x))
   m = 1
@@ -26,11 +28,12 @@ block_to_json.data.frame <- function(x){
   return(dat)
 }
 
+#' @export
 block_to_json.block <- function(x){
-  class(x) = class(x)[-1]
   NextMethod()
 }
 
+#' @export
 display_d3 <- function(block){
   if (!('block' %in% class(block))){
     block = make_block(block)
@@ -46,8 +49,8 @@ display_d3 <- function(block){
 }
 
 #' Hook to crop png using imagemagick convert
-#' 
-#' 
+#'
+#'
 hook_crop_png = function(before, options, envir){
   if (before){
     return()
@@ -65,9 +68,9 @@ hook_crop_png = function(before, options, envir){
   lapply(paths, function(x) {
     message("optimizing ", x)
     x = shQuote(x)
-    cmd = paste("convert", if (is.character(options$convert)) 
+    cmd = paste("convert", if (is.character(options$convert))
       options$convert, x, x)
-    if (.Platform$OS.type == "windows") 
+    if (.Platform$OS.type == "windows")
       cmd = paste(Sys.getenv("COMSPEC"), "/c", cmd)
     system(cmd)
   })

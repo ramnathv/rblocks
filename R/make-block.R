@@ -2,18 +2,21 @@ make_block <- function(x, ...){
   UseMethod('make_block')
 }
 
+#' @export
 make_block.list <- function(x, ...){
   as.block(lapply(x, function(xi){
     rep(get_fill(xi), length(xi))
   }))
 }
 
+#' @export
 make_block.matrix <- function(x, ...){
   as.block(apply(x, 2, function(xi){
     rep(get_fill(xi), length(xi))
   }))
 }
 
+#' @export
 make_block.data.frame = function(x, ...){
   as.block(as.data.frame(lapply(x, function(xi){
     rep(get_fill(xi), length(xi))
@@ -24,6 +27,7 @@ make_block.data.frame = function(x, ...){
 #   as.block(rep(get_fill(mode(xi)), length(x)))
 # }
 
+#' @export
 make_block.default = function(x, ...){
   if (length(x) > 1){
     return(as.block(rep(get_fill(x), length(x))))

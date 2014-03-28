@@ -41,12 +41,9 @@ as.block = function(x){
   return(x)
 }
 
-#' Print a block object as a grid
-#'
-#' @param x block object to display
 #' @export
-print.block = function(x){
-  display(x)
+print.block = function(x, ...){
+  display(x, ...)
 }
 
 #' Display a block grid
