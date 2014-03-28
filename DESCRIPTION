@@ -1,11 +1,12 @@
 Package: rblocks
 Type: Package
 Title: rBlocks is a port of ipythonblocks to R, to provide a fun and
-  visual tool to explore data structures and control flow.
+    visual tool to explore data structures and control flow.
 Version: 0.1.1
 Date: 2014-03-14
 Author: Ramnath Vaidyanathan
 Maintainer: Ramnath Vaidyanathan <ramnath.vaidya@gmail.com>
 Description: rBlocks is a port of ipythonblocks to R, to provide a fun and
-  visual tool to explore data structures and control flow.
+    visual tool to explore data structures and control flow.
 License: MIT
+Roxygen: list(wrap = FALSE)
